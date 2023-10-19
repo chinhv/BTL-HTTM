@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 
 @Data
 @Entity
@@ -36,10 +36,14 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "user_favor",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "favor_id")
+            joinColumns = @JoinColumn(name = "user_id", insertable = true, updatable = true),
+            inverseJoinColumns = @JoinColumn(name = "favor_id", insertable = true, updatable = true)
     )
-    private Set<Favor> favorSet;
+    private List<Favor> favors;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<View> views;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
