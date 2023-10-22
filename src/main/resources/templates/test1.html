@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CSDLPT-N4</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 4 -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+  <style>
+    .table-dark tr th {
+      text-align: center;
+    }
+
+    .table tbody tr td {
+      text-align: center;
+    }
+    .color-palette {
+      height: 35px;
+      line-height: 35px;
+      text-align: right;
+      padding-right: .75rem;
+    }
+
+    .color-palette.disabled {
+      text-align: center;
+      padding-right: 0;
+      display: block;
+    }
+
+    .color-palette-set {
+      margin-bottom: 15px;
+    }
+
+    .color-palette span {
+      display: none;
+      font-size: 12px;
+    }
+
+    .color-palette:hover span {
+      display: block;
+    }
+
+    .color-palette.disabled span {
+      display: block;
+      text-align: left;
+      padding-left: .75rem;
+    }
+
+    .color-palette-box h4 {
+      position: absolute;
+      left: 1.25rem;
+      margin-top: .75rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      display: block;
+      z-index: 7;
+    }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input style="box-shadow: none" class="form-control form-control-navbar" type="search" placeholder="Tìm nhân viên" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <a style="font-weight: bold;font-size: 17px;margin-left: 190px" th:href="@{/addEmployee}"
+       class="btn btn-success col-lg-2"><i class="fa fa-user-plus" style="margin-right: 4px"></i>Thêm mới</a>
+
+    <!-- Right navbar links -->
+
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Nhóm 4</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a th:href="@{/home}" class="nav-link">
+              <i class="nav-icon fas fa fa-bar-chart"></i>
+              <p>
+                Doanh Thu
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                Quản Lý
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/employee}" class="nav-link active">
+                  <i class="fa fa-user-circle nav-icon"></i>
+                  <p>Nhân Viên</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/customer}" class="nav-link">
+                  <i class="fa fa-user-circle nav-icon"></i>
+                  <p>Khách Hàng</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/invoice}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Hóa Đơn</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/material}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vật Liệu</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+ <!-- <div class="content-wrapper">-->
+<!--    <div class="container">-->
+<!--      <table class="table table-striped table-bordered">-->
+<!--        <thead class="table-dark">-->
+<!--        <tr>-->
+<!--          <th>Mã</th>-->
+<!--          <th>Họ và Tên</th>-->
+<!--          <th>Địa Chỉ</th>-->
+<!--          <th>Ngày Sinh</th>-->
+<!--          <th>Lương</th>-->
+<!--          <th style="width: 170px">Sửa/Xóa</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+
+<!--        <tbody>-->
+<!--        <tr th:each="o:${listE}">-->
+<!--          <td>[[${o.id}]]</td>-->
+<!--          <td>[[${o.fullName}]]</td>-->
+<!--          <td>[[${o.address}]]</td>-->
+<!--          <td>[[${o.birth}]]</td>-->
+<!--          <td>[[${o.salary}]] đ</td>-->
+<!--          <td style="display: flex;width: 195px">-->
+<!--            <div style="display: flex;width: 170px"><a th:href="@{/edit/employee/{id}(id=${o.id})}" class="btn btn-warning" style="color: white;font-weight: bold"><i class="fa fa-edit" style="color: blue"></i>Sửa</a></div>-->
+<!--            <div style="display: flex;width: 220px"><a th:href="@{/delete/employee/{id}(id=${o.id})}" onclick=" return confirm('Bạn có chắc chắn muốn xóa?')" style="margin-left: 10px;color: white;font-weight: bold"-->
+<!--                                                       class="btn btn-danger"><i class="fa fa-minus-circle" style="color: blue;margin-right: 4px"></i>Xóa</a></div>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody> -->
+
+<!--      </table>-->
+<!--      <ul class="reviews-pagination">-->
+<!--        <li th:if="${page>1}"><a th:href="@{'/employee?page='+${page-1}}"><i class="fa fa-angle-left"></i></a></li>-->
+<!--        <th:block th:each="o:${numlist}">-->
+<!--          <li class="active" th:if="${o}==${page}">[[${o}]]</li>-->
+<!--          <li th:if="${o}!=${page}"><a th:href="@{'/employee?page='+${o}}">[[${o}]]</a></li>-->
+<!--        </th:block>-->
+<!--        <li><a th:href="@{'/employee?page='+${page+1}}"><i class="fa fa-angle-right"></i></a></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</body>
+</html>

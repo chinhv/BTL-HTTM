@@ -4,6 +4,8 @@ import com.example.adminhttm.entities.Favor;
 import com.example.adminhttm.repository.FavorRepository;
 import com.example.adminhttm.service.FavorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +42,18 @@ public class FavorServiceImpl implements FavorService {
     }
 
     @Override
+    public Page<Favor> findAll1(Pageable pageable) {
+        return favorRepository.findAll(pageable);
+    }
+
+    @Override
     public List<Favor> doSearch(String keyword) {
         return favorRepository.doSearch(keyword);
+    }
+
+    @Override
+    public Page<Favor> doSearch1(String keyword, Pageable pageable) {
+        return favorRepository.doSearch1(keyword, pageable);
     }
 
     @Override

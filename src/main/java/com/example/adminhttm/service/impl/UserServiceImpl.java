@@ -4,6 +4,8 @@ import com.example.adminhttm.entities.User;
 import com.example.adminhttm.repository.UserRepository;
 import com.example.adminhttm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +42,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Page<User> findAll1(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    @Override
     public List<User> doSearch(String keyword) {
         return userRepository.doSearch(keyword);
+    }
+
+    @Override
+    public Page<User> doSearch1(String keyword, Pageable pageable) {
+        return userRepository.doSearch1(keyword, pageable);
     }
 
     @Override

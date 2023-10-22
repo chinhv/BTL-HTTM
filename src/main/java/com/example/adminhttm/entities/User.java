@@ -25,6 +25,12 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "age")
+    private Integer age;
+
     @Column(name = "email")
     private String email;
 

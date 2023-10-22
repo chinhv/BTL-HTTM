@@ -22,7 +22,4 @@ public class Favor {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "favor")
-    private List<Product> products;
 }

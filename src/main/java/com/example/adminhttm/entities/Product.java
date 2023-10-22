@@ -30,9 +30,12 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "favor_id")
-    private Favor favor;
+    @ManyToMany
+    @JoinTable(name = "product_favor",
+            joinColumns = @JoinColumn(name = "product_id", insertable = true, updatable = true),
+            inverseJoinColumns = @JoinColumn(name = "favor_id", insertable = true, updatable = true)
+    )
+    private List<Favor> favors;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")
