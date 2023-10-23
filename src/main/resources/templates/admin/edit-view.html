@@ -139,8 +139,9 @@
         .formbold-btn:hover {
             box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
         }
+
         .table-responsive {
-            max-height: 200px; /* Điều chỉnh độ cao tối đa cho việc cuộn */
+            max-height: 250px; /* Điều chỉnh độ cao tối đa cho việc cuộn */
             overflow-y: auto;
         }
         thead {
@@ -149,14 +150,13 @@
             background-color: #fff;
         }
 
-        #searchInput {
+        #searchInput1, #searchInput2 {
             width: 200px;
             padding: 5px;
             margin-right: 10px;
             border: 1px solid #333;
             border-radius: 5px;
             margin-bottom: 10px;
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -191,157 +191,122 @@
                 <!-- Author: FormBold Team -->
                 <!-- Learn More: https://formbold.com -->
                 <div class="formbold-form-wrapper">
-                    <form method="POST" th:action="@{/user/update}">
+                    <form method="POST" th:action="@{/view/update}">
                         <div class="formbold-form-title">
-                            <h2 class="">Sửa thông tin người dùng</h2>
-                        </div>
-                        <div class="formbold-mb-3">
-                            <label for="id" class="formbold-form-label">
-                                ID
-                            </label>
-                            <input
-                                    type="text"
-                                    name="id"
-                                    id="id"
-                                    class="formbold-form-input"
-                                    th:value="${user.id}"
-                            />
-                        </div>
-                        <div class="formbold-mb-3">
-                            <label for="firstname" class="formbold-form-label">
-                                Tên người dùng
-                            </label>
-                            <input
-                                    type="text"
-                                    name="userName"
-                                    id="firstname"
-                                    class="formbold-form-input"
-                                    th:value="${user.userName}"
-                            />
-                        </div>
-                        <div class="formbold-mb-3">
-                            <label for="address" class="formbold-form-label">
-                                Email
-                            </label>
-                            <input
-                                    type="text"
-                                    name="email"
-                                    id="address"
-                                    class="formbold-form-input"
-                                    th:value="${user.email}"
-                            />
-                        </div>
-                        <div class="formbold-mb-3">
-                            <label for="address2" class="formbold-form-label">
-                                Phone
-                            </label>
-                            <input
-                                    type="text"
-                                    name="phone"
-                                    id="address2"
-                                    class="formbold-form-input"
-                                    th:value="${user.phone}"
-                            />
-                        </div>
-                        <div class="formbold-input-flex">
-                            <div>
-                                <label for="role" class="formbold-form-label">
-                                    Role
-                                </label>
-                                <input
-                                        type="text"
-                                        name="role"
-                                        id="role"
-                                        class="formbold-form-input"
-                                        th:value="${user.role}"
-                                />
-                            </div>
-                            <div>
-                                <label for="lastname" class="formbold-form-label"> Mật khẩu </label>
-                                <input
-                                        type="text"
-                                        name="password"
-                                        id="lastname"
-                                        class="formbold-form-input"
-                                        th:value="${user.password}"
-                                />
-                            </div>
-                            <div>
-                                <label for="gender" class="formbold-form-label">
-                                    Giới tính
-                                </label>
-                                <input
-                                        type="text"
-                                        name="gender"
-                                        id="gender"
-                                        class="formbold-form-input"
-                                        th:value="${user.gender}"
-                                />
-                            </div>
-                            <div>
-                                <label for="age" class="formbold-form-label">
-                                    Tuổi
-                                </label>
-                                <input
-                                        type="text"
-                                        name="age"
-                                        id="age"
-                                        class="formbold-form-input"
-                                        th:value="${user.age}"
-                                />
-                            </div>
+                            <h2 class="">Sửa lịch sử xem</h2>
                         </div>
                         <div class="formbold-mb-3">
                             <label class="formbold-form-label">
-                                Sở thích hiện tại:
+                                ID
                             </label>
-                            <span th:each="favor, iterStat : ${user.getFavors()}">
-                                <span style="font-size: 16px; color: #536387;" th:text="${favor.getName()}"></span>
-                                <span th:if="${!iterStat.last}">, </span>
-                            </span>
+                            <p th:text="${view.id}" style="font-size: 16px; color: #536387;"></p>
                         </div>
-                        <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+                        <div class="formbold-mb-3">
+                            <label class="formbold-form-label">
+                                Tên người dùng
+                            </label>
+                            <p th:text="${view.getUser().getUserName()}" style="font-size: 16px; color: #536387;"></p>
+                        </div>
+                        <input type="text" id="searchInput1" placeholder="Tìm kiếm...">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Sở thích(theo danh mục)</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên người dùng</th>
+                                    <th>Tuổi</th>
+                                    <th>Giới tính</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="favor : ${listF}">
-                                        <td th:text="${favor.getId()}"></td>
-                                        <td th:text="${favor.getName()}"></td>
-                                        <td>
-                                            <input type="checkbox" name="favors" th:value="${favor.getId()}"/>
-                                        </td>
-                                    </tr>
+                                <tr th:each="user : ${listU}">
+                                    <td th:text="${user.getId()}"></td>
+                                    <td th:text="${user.getUserName()}"></td>
+                                    <td th:text="${user.getAge()}"></td>
+                                    <td th:text="${user.getGender()}"></td>
+                                    <td>
+                                        <input type="radio" name="user" th:value="${user.getId()}"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="formbold-mb-3">
+                            <label class="formbold-form-label">
+                                Sản phẩm đã xem
+                            </label>
+                            <p th:text="${view.getProduct().getName()}" style="font-size: 16px; color: #536387;"></p>
+                        </div>
+                        <input type="text" id="searchInput2" placeholder="Tìm kiếm...">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Mô tả</th>
+                                    <th>Danh mục</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="product : ${listP}">
+                                    <td th:text="${product.getId()}"></td>
+                                    <td th:text="${product.getName()}"></td>
+                                    <td th:text="${product.getPrice}"></td>
+                                    <td th:text="${product.getDescription()}"></td>
+                                    <td>
+                                        <span th:each="favor, iterStat : ${product.getFavors()}">
+                                            <span th:text="${favor.getName()}"></span>
+                                            <span th:if="${!iterStat.last}">, </span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="product" th:value="${product.getId()}"/>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
                         <script>
-                            document.getElementById("searchInput").addEventListener("keyup", function() {
-                                var input, filter, table, tr, td, i, txtValue;
-                                input = document.getElementById("searchInput");
-                                filter = input.value.toUpperCase();
-                                table = document.querySelector("table");
-                                tr = table.getElementsByTagName("tr");
+                            function setupTableSearch(inputId, tableIndex) {
+                                document.getElementById(inputId).addEventListener("keyup", function() {
+                                    var input, filter, table, tr, td, i, txtValue;
+                                    input = document.getElementById(inputId);
+                                    filter = input.value.toUpperCase();
+                                    table = document.querySelectorAll("table")[tableIndex];
+                                    tr = table.getElementsByTagName("tr");
 
-                                for (i = 0; i < tr.length; i++) {
-                                    td = tr[i].getElementsByTagName("td")[1]; // 0 là cột bạn muốn tìm kiếm
-                                    if (td) {
-                                        txtValue = td.textContent || td.innerText;
-                                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                            tr[i].style.display = "";
-                                        } else {
-                                            tr[i].style.display = "none";
+                                    for (i = 0; i < tr.length; i++) {
+                                        td = tr[i].getElementsByTagName("td")[1]; // 0 là cột bạn muốn tìm kiếm
+                                        if (td) {
+                                            txtValue = td.textContent || td.innerText;
+                                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                                tr[i].style.display = "";
+                                            } else {
+                                                tr[i].style.display = "none";
+                                            }
                                         }
                                     }
-                                }
-                            });
+                                });
+                            }
+                            setupTableSearch("searchInput1", 0); // Bảng 1
+                            setupTableSearch("searchInput2", 1); // Bảng 2
                         </script>
+                        <div class="formbold-mb-3" style="margin-top: 20px;">
+                            <label for="firstname" class="formbold-form-label">
+                                Thời điểm xem
+                            </label>
+                            <input
+                                    type="date"
+                                    name="viewDate"
+                                    id="firstname"
+                                    class="formbold-form-input"
+                                    th:value="${view.getViewDate().toString()}"
+                            />
+                        </div>
                         <button class="formbold-btn">Cập nhật</button>
                     </form>
                 </div>

@@ -98,14 +98,14 @@
             </div>
         </div>
         <div class="col-md-9">
-            <h2>Danh sách người dùng</h2>
-            <form method="post" th:action="@{/user/search}" class="search-container">
+            <h2>Lịch sử xem sản phẩm</h2>
+            <form method="post" th:action="@{#}" class="search-container">
                 <input type="text" id="searchInput" placeholder="Tìm..." name = "keyword">
                 <button type="submit" class="btn-search">Tìm kiếm</button>
             </form>
             </br>
             <div class="centered">
-                <a th:href="@{/user/get-create-form}" class="btn btn-primary btn-sm">Thêm mới người dùng</a>
+                <a th:href="@{/view/get-create-form}" class="btn btn-primary btn-sm">Thêm mới lịch sử xem</a>
             </div>
             </br>
             <div class="table-responsive">
@@ -114,29 +114,20 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên người dùng</th>
-                        <th>Tuổi</th>
-                        <th>Giới tính</th>
-                        <th>Role</th>
-                        <th style="width: 40%;">Sở thích</th>
+                        <th>Sản phẩm đã xem</th>
+                        <th>Ngày xem</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user : ${listU}">
-                        <td th:text="${user.getId()}"></td>
-                        <td th:text="${user.getUserName()}"></td>
-                        <td th:text="${user.getAge()}"></td>
-                        <td th:text="${user.getGender()}"></td>
-                        <td th:text="${user.getRole() == 1 ? 'admin' : 'customer'}"></td>
+                    <tr th:each="view : ${listV}">
+                        <td th:text="${view.getId()}"></td>
+                        <td th:text="${view.getUser().getUserName()}"></td>
+                        <td th:text="${view.getProduct().getName()}"></td>
+                        <td th:text="${view.getViewDate()}"></td>
                         <td>
-                            <span th:each="favor, iterStat : ${user.getFavors()}">
-                                <span th:text="${favor.getName()}"></span>
-                                <span th:if="${!iterStat.last}">, </span>
-                            </span>
-                        </td>
-                        <td>
-                            <a th:href="@{'/user/' + ${user.id}}" class="btn btn-warning btn-sm">Xem</a>
-                            <a th:href="@{'/user/update-user/' + ${user.id}}" class="btn btn-primary btn-sm">Sửa</a>
-                            <a th:href="@{'/user/delete/' + ${user.id}}" class="btn btn-danger btn-sm">Xóa</a>
+                            <a th:href="@{'/view/update-view/' + ${view.id}}" class="btn btn-primary btn-sm">Sửa</a>
+                            <a th:href="@{'/view/delete/' + ${view.id}}" class="btn btn-danger btn-sm">Xóa</a>
                         </td>
                     </tr>
                     </tbody>

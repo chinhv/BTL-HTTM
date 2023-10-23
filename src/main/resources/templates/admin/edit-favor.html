@@ -149,7 +149,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto"></ul>
     <span class="navbar-text">
-                Xin chào, <strong>Người dùng</strong> | <a th:href="@{/logout}">Đăng xuất</a>
+                Xin chào, <strong th:text="${session.user}"></strong> | <a th:href="@{/logout}">Đăng xuất</a>
             </span>
   </div>
 </nav>
@@ -159,9 +159,9 @@
     <div class="col-md-3">
       <div class="menu">
         <a href="#" class="active"> Menu</a>
-        <a th:href="@{/admin/products}"><i class="fas fa-box-open"></i> Products</a>
-        <a th:href="@{/admin/detail}"><i class="fas fa-clipboard-list"></i>Product Details</a>
-        <a th:href="@{/admin/user}"><i class="fas fa-users"></i> Users</a>
+        <a th:href="@{/view/get-all}"><i class="fas fa-box-open"></i>Quản lý lịch sử xem</a>
+        <a th:href="@{/favor/get-all}"><i class="fas fa-clipboard-list"></i>Quản lý sở thích - nhãn</a>
+        <a th:href="@{/user/get-all}"><i class="fas fa-users active"></i>Quản lý người dùng</a>
       </div>
     </div>
     <div class="col-md-9">

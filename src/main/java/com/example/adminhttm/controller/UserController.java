@@ -1,6 +1,5 @@
 package com.example.adminhttm.controller;
 
-import com.example.adminhttm.dto.LoginDto;
 import com.example.adminhttm.entities.Favor;
 import com.example.adminhttm.entities.User;
 import com.example.adminhttm.service.FavorService;
@@ -9,14 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 //@RestController
@@ -60,12 +55,9 @@ public class UserController {
     }
 
     @GetMapping("/get-create-form")
-    public String doRetrieveToCreate(ModelMap modelMap,@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo){
-        Pageable pageable = PageRequest.of(pageNo - 1 , 5);
-        Page<Favor> list = favorService.findAll1(pageable);
-        modelMap.addAttribute("totalPage", list.getTotalPages());
-        modelMap.addAttribute("currentPage", pageNo);
-        modelMap.addAttribute("listF", list.getContent());
+    public String doRetrieveToCreate(ModelMap modelMap){
+        List<Favor> list = favorService.findAll();
+        modelMap.addAttribute("listF", list);
         return "admin/add-user";
     }
 
@@ -86,19 +78,16 @@ public class UserController {
             return "redirect:/user/get-all";
         }else{
             modelMap.addAttribute("message", "Người dùng đã tồn tại");
-            return "admin/add-user";
+            return "redirect:/user/get-create-form";
         }
 
     }
 
     @GetMapping("/update-user/{id}")
-    public String doRetrieveToUpdate(ModelMap modelMap,@PathVariable Integer id,@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo){
+    public String doRetrieveToUpdate(ModelMap modelMap,@PathVariable Integer id){
         User user = userService.retrieve(id);
-        Pageable pageable = PageRequest.of(pageNo - 1 , 5);
-        Page<Favor> list = favorService.findAll1(pageable);
-        modelMap.addAttribute("totalPage", list.getTotalPages());
-        modelMap.addAttribute("currentPage", pageNo);
-        modelMap.addAttribute("listF", list.getContent());
+        List<Favor> list = favorService.findAll();
+        modelMap.addAttribute("listF", list);
         modelMap.addAttribute("user", user);
         return "admin/edit-user";
     }

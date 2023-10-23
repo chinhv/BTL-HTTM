@@ -95,7 +95,7 @@
         <div class="row">
             <div class="col-md-4 login-sec">
                 <h2 class="text-center">Login Now</h2>
-                <form class="login-form" th:action="@{/user/login}" method="post">
+                <form class="login-form" th:action="@{/login}" method="post">
                     <div class="form-group">
                         <label class="text-uppercase">Username</label>
                         <input type="text" class="form-control" placeholder="" name="email">
@@ -109,7 +109,7 @@
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <small style="font-size:14px;"></small><a th:href="@{/register}">Register now</a></small>
+                            <small style="font-size:14px;"></small><a th:href="@{/register-page}">Register now</a></small>
                         </label>
                         <button type="submit" class="btn btn-login float-right">Submit</button>
                     </div>

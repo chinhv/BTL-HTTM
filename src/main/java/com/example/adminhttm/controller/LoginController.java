@@ -5,10 +5,7 @@ import com.example.adminhttm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +27,10 @@ public class LoginController {
             modelMap.addAttribute("ERROR", "Không tồn tại người dùng");
             return "login1";
         }else{
+            if(userExist.getRole() == 0){
+                modelMap.addAttribute("ERROR", "Yêu cầu quyền quản trị");
+                return "login1";
+            }
             if(userExist.getPassword().equals(password)){
                 session.setAttribute("user", userExist.getUserName());
                 return "redirect:/favor/get-all";
@@ -37,6 +38,29 @@ public class LoginController {
                 modelMap.addAttribute("ERROR", "Sai mật khẩu");
                 return "login1";
             }
+        }
+    }
+
+    @RequestMapping("/register-page")
+    public String getRegister(){
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(ModelMap modelMap,@ModelAttribute("user") User user){
+        User userExist = userService.findByEmail(user.getEmail());
+        if(userExist == null){
+            User newUser = new User();
+            newUser.setUserName(user.getUserName());
+            newUser.setPassword(user.getPassword());
+            newUser.setEmail(user.getEmail());
+            newUser.setRole(1);
+            newUser.setPhone(user.getPhone());
+            userService.create(newUser);
+            return "login1";
+        }else{
+            modelMap.addAttribute("message", "Người dùng đã tồn tại");
+            return "register";
         }
     }
 
