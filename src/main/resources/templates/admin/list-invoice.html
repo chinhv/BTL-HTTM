@@ -105,7 +105,7 @@
             </form>
             </br>
             <div class="centered">
-                <a th:href="@{/view/get-create-form}" class="btn btn-primary btn-sm">Thêm mới lịch sử xem</a>
+                <a th:href="@{/invoice/get-create-form}" class="btn btn-primary btn-sm">Thêm mới lịch sử xem</a>
             </div>
             </br>
             <div class="table-responsive">
@@ -114,19 +114,17 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên người dùng</th>
-                        <th>Sản phẩm đã xem</th>
-                        <th>Ngày xem</th>
+                        <th>Ngày mua</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="view : ${listV}">
-                        <td th:text="${view.getId()}"></td>
-                        <td th:text="${view.getUser().getUserName()}"></td>
-                        <td th:text="${view.getProduct().getName()}"></td>
-                        <td th:text="${view.getViewDate()}"></td>
+                    <tr th:each="invoice : ${listI}">
+                        <td th:text="${invoice.getId()}"></td>
+                        <td th:text="${invoice.getUser().getUserName()}"></td>
+                        <td th:text="${invoice.getCreateDate()}"></td>
                         <td>
-                            <a th:href="@{'/view/update-view/' + ${view.id}}" class="btn btn-primary btn-sm">Sửa</a>
+                            <a th:href="@{'//update-view/' + ${view.id}}" class="btn btn-primary btn-sm">Sửa</a>
                             <a th:href="@{'/view/delete/' + ${view.id}}" class="btn btn-danger btn-sm">Xóa</a>
                         </td>
                     </tr>

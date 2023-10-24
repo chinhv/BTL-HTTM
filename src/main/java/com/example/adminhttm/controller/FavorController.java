@@ -44,12 +44,12 @@ public class FavorController {
         return "admin/list-favor";
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public String doSearch(ModelMap modelMap,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
                            @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo)
     {
-        Pageable pageable = PageRequest.of(pageNo - 1 , 5);
+        Pageable pageable = PageRequest.of(pageNo - 1 , 2);
         Page<Favor> list = favorService.doSearch1(keyword, pageable);
         modelMap.addAttribute("totalPage", list.getTotalPages());
         modelMap.addAttribute("currentPage", pageNo);

@@ -61,7 +61,7 @@ public class ViewController {
         return "admin/add-view";
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public String doSearch(ModelMap modelMap,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
                            @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo)
@@ -86,10 +86,12 @@ public class ViewController {
     }
 
     @PostMapping("/update")
-    public String doUpdate(ModelMap modelMap,@ModelAttribute("view") View view){
+    public String doUpdate(ModelMap modelMap,@ModelAttribute ViewDto view){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         View v = viewService.retrieve(view.getId());
         v.setUser(view.getUser());
         v.setProduct(view.getProduct());
+        v.setViewDate(LocalDate.parse(view.getViewDate(), formatter));
         viewService.update(v, v.getId());
         return "redirect:/view/get-all";
     }

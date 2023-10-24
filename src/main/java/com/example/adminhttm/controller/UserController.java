@@ -41,7 +41,7 @@ public class UserController {
         return "admin/detail-user";
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public String doSearch(ModelMap modelMap,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
                            @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo)

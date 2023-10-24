@@ -24,8 +24,8 @@ public class Invoice {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "totalbill")
-    private Integer totalBill;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "note")
     private String note;
