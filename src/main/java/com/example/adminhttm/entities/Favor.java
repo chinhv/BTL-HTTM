@@ -22,4 +22,12 @@ public class Favor {
     @Column(name = "name")
     private String name;
 
+    @ManyToMany(mappedBy = "favors")
+    private List<User> users;
+
+    public void removeUser(User user){
+        this.users.remove(user);
+        user.getFavors().remove(this);
+    }
+
 }

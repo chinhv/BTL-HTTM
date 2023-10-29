@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("invoice")
@@ -53,24 +54,40 @@ public class InvoiceController {
     }
 
     @PostMapping("/add")
-    public String doCreate(ModelMap modelMap, @ModelAttribute InvoiceDto invoice){
+    public String doCreate(ModelMap modelMap, @ModelAttribute InvoiceDto invoiceDto) {
+        // Lấy dữ liệu từ form
+        User selectedUser = userService.retrieve(invoiceDto.getUser());
+        String address = invoiceDto.getAddress();
+        String note = invoiceDto.getNote();
+        LocalDate createDate = LocalDate.parse(invoiceDto.getCreateDate());
+
+        System.out.println(invoiceDto);
+
+        // Tạo hóa đơn mới
         Invoice newInvoice = new Invoice();
         Invoice saveInvoice = invoiceService.create(newInvoice);
-        List<InvoiceDetail> newList = new ArrayList<>();
-        for(InvoiceDetail i : invoice.getList()){
+        saveInvoice.setUser(selectedUser);
+        saveInvoice.setAddress(address);
+        saveInvoice.setNote(note);
+        saveInvoice.setCreateDate(createDate);
+
+        // Tạo danh sách chi tiết hóa đơn
+        List<InvoiceDetail> invoiceDetails = new ArrayList<>();
+        for (Integer productId : invoiceDto.getProducts()) {
+            Product selectedProduct = productService.retrieve(productId);
+
             InvoiceDetail newInvoiceDetail = new InvoiceDetail();
+            newInvoiceDetail.setProduct(selectedProduct);
+            newInvoiceDetail.setCount(1);
             newInvoiceDetail.setInvoice(saveInvoice);
-            newInvoiceDetail.setProduct(i.getProduct());
-            newInvoiceDetail.setCount(i.getCount());
-            newList.add(newInvoiceDetail);
+
+            invoiceDetails.add(newInvoiceDetail);
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        saveInvoice.setUser(invoice.getUser());
-        saveInvoice.setAddress(invoice.getAddress());
-        saveInvoice.setNote(invoice.getNote());
-        saveInvoice.setCreateDate(LocalDate.parse(invoice.getCreateDate(), formatter));
-        saveInvoice.setInvoiceDetails(newList);
+        // Gán danh sách chi tiết hóa đơn vào hóa đơn
+        saveInvoice.setInvoiceDetails(invoiceDetails);
+        // Lưu hóa đơn và chi tiết hóa đơn vào cơ sở dữ liệu
         invoiceService.update(saveInvoice, saveInvoice.getId());
+
         return "redirect:/invoice/get-all";
     }
 }

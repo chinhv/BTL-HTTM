@@ -66,12 +66,20 @@ public class UserController {
         User userExist = userService.findByEmail(user.getEmail());
         if(userExist == null){
             User newUser = new User();
+            newUser.setCode(user.getCode());
             newUser.setUserName(user.getUserName());
             newUser.setPassword(user.getPassword());
             newUser.setEmail(user.getEmail());
             newUser.setRole(user.getRole());
             newUser.setFavors(user.getFavors());
-            newUser.setPhone(user.getPhone());
+            StringBuilder result = new StringBuilder();
+            for(Favor favor : user.getFavors()){
+                if(result.length() > 0){
+                    result.append("|");
+                }
+                result.append(favor.getName());
+            }
+            newUser.setCategory(result.toString());
             newUser.setGender(user.getGender());
             newUser.setAge(user.getAge());
             userService.create(newUser);
@@ -95,12 +103,20 @@ public class UserController {
     @PostMapping("/update")
     public String doUpdate(ModelMap modelMap,@ModelAttribute("user") User user){
         User u = userService.retrieve(user.getId());
+        u.setCode(user.getCode());
         u.setUserName(user.getUserName());
         u.setPassword(user.getPassword());
         u.setEmail(user.getEmail());
         u.setRole(user.getRole());
-        u.setPhone(user.getPhone());
         u.setFavors(user.getFavors());
+        StringBuilder result = new StringBuilder();
+        for(Favor favor : user.getFavors()){
+            if(result.length() > 0){
+                result.append("|");
+            }
+            result.append(favor.getName());
+        }
+        u.setCategory(result.toString());
         userService.update(u.getId(), u);
         modelMap.addAttribute("message", "Cập nhật thành công");
         return "redirect:/user/get-all";

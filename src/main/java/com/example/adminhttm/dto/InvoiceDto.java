@@ -8,10 +8,9 @@ import java.util.List;
 
 @Data
 public class InvoiceDto {
-    private Integer id;
-    private User user;
+    private Integer user;
     private String address;
     private String note;
     private String createDate;
-    private List<InvoiceDetail> list;
+    private List<Integer> products;
 }

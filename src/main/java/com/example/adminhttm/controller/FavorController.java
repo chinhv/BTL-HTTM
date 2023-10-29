@@ -80,7 +80,6 @@ public class FavorController {
     @GetMapping("/delete/{id}")
     public String doDelete(ModelMap modelMap,@PathVariable Integer id){
         favorService.delete(id);
-        modelMap.addAttribute("message", "Đã xóa");
         return "redirect:/favor/get-all";
     }
 //    @GetMapping("{id}")

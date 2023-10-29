@@ -1,6 +1,8 @@
 package com.example.adminhttm.service.impl;
 
 import com.example.adminhttm.entities.Favor;
+import com.example.adminhttm.entities.Product;
+import com.example.adminhttm.entities.User;
 import com.example.adminhttm.repository.FavorRepository;
 import com.example.adminhttm.service.FavorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,16 @@ public class FavorServiceImpl implements FavorService {
 
     @Override
     public void delete(Integer id) {
-        favorRepository.deleteById(id);
+        Favor favor = favorRepository.findById(id).orElse(null);
+
+        if (favor != null) {
+
+
+            favor.getUsers().clear();
+            
+            // Delete the favor
+            favorRepository.delete(favor);
+        }
     }
 
     @Override

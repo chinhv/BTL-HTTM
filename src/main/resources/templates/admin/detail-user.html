@@ -129,7 +129,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Tên trang quản trị</a>
+  <a class="navbar-brand" href="#">TQuản trị dữ liệu</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -162,9 +162,9 @@
             </div>
             <div class="formbold-mb-3">
               <label class="formbold-form-label">
-                ID
+                Mã người dùng
               </label>
-              <p th:text="${user.id}" style="font-size: 16px; color: #536387;"></p>
+              <p th:text="${user.code}" style="font-size: 16px; color: #536387;"></p>
             </div>
             <div class="formbold-mb-3">
               <label class="formbold-form-label">
@@ -178,22 +178,12 @@
               </label>
               <p th:text="${user.email}" style="font-size: 16px; color: #536387;"></p>
             </div>
-            <div class="formbold-mb-3">
-              <label class="formbold-form-label">
-                Phone
-              </label>
-              <p th:text="${user.phone}" style="font-size: 16px; color: #536387;"></p>
-            </div>
             <div class="formbold-input-flex">
               <div>
                 <label class="formbold-form-label">
                   Role
                 </label>
                 <p th:text="${user.role == 1 ? 'admin' : 'customer'}" style="font-size: 16px; color: #536387;"></p>
-              </div>
-              <div>
-                <label class="formbold-form-label"> Mật khẩu </label>
-                <p th:text="${user.password}" style="font-size: 16px; color: #536387;"></p>
               </div>
               <div>
                 <label class="formbold-form-label">
@@ -212,10 +202,7 @@
               <label class="formbold-form-label">
                 Sở thích hiện tại:
               </label>
-              <span th:each="favor, iterStat : ${user.getFavors()}">
-                <span style="font-size: 16px; color: #536387;" th:text="${favor.getName()}"></span>
-                <span th:if="${!iterStat.last}">, </span>
-              </span>
+              <p th:text="${user.category}" style="font-size: 16px; color: #536387;"></p>
             </div>
             <button class="formbold-btn"><a th:href="@{/user/get-all}" style="color: #fff;">Quay lại</a></button>
         </div>

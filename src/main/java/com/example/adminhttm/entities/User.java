@@ -19,6 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "username")
     private String userName;
 
@@ -34,9 +37,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone")
-    private String phone;
-
     @Column(name = "role")
     private Integer role; // 0: user, 1:admin
 
@@ -46,6 +46,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "favor_id", insertable = true, updatable = true)
     )
     private List<Favor> favors;
+
+    @Column(name = "category")
+    private String category;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")

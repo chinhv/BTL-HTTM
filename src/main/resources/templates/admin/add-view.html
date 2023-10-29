@@ -164,7 +164,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Tên trang quản trị</a>
+    <a class="navbar-brand" href="#">Quản trị dữ liệu</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -188,10 +188,10 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="formbold-main-wrapper">
+
                 <!-- Author: FormBold Team -->
                 <!-- Learn More: https://formbold.com -->
-                <div class="formbold-form-wrapper">
+
                     <form method="POST" th:action="@{/view/add}">
                         <div class="formbold-form-title">
                             <h2 class="">Thêm mới lịch sử xem</h2>
@@ -229,8 +229,7 @@
                                     <th>ID</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Giá</th>
-                                    <th>Mô tả</th>
-                                    <th>Danh mục</th>
+                                    <th style="width: 30%;">Danh mục</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -239,12 +238,8 @@
                                     <td th:text="${product.getId()}"></td>
                                     <td th:text="${product.getName()}"></td>
                                     <td th:text="${product.getPrice}"></td>
-                                    <td th:text="${product.getDescription()}"></td>
-                                    <td>
-                                        <span th:each="favor, iterStat : ${product.getFavors()}">
-                                            <span th:text="${favor.getName()}"></span>
-                                            <span th:if="${!iterStat.last}">, </span>
-                                        </span>
+                                    <td th:text="${product.getCategory()}">
+
                                     </td>
                                     <td>
                                         <input type="radio" name="product" th:value="${product.getId()}"/>
@@ -292,8 +287,8 @@
                         <button class="formbold-btn">Thêm mới</button>
                     </form>
                 </div>
-            </div>
-        </div>
+
+
     </div>
 
 </div>

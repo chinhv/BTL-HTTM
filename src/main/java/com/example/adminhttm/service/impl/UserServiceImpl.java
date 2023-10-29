@@ -33,7 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Integer id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElse(null);
+
+        if (user != null) {
+            // Remove the user from any favors
+            user.getFavors().clear(); // This will remove all the associations
+
+            // Delete the user
+            userRepository.delete(user);
+        }
     }
 
     @Override

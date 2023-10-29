@@ -18,6 +18,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "name")
     private String name;
 
@@ -25,17 +28,19 @@ public class Product {
     private String imgLink;
 
     @Column(name = "price")
-    private Integer price;
+    private String price;
 
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
-    @JoinTable(name = "product_favor",
-            joinColumns = @JoinColumn(name = "product_id", insertable = true, updatable = true),
-            inverseJoinColumns = @JoinColumn(name = "favor_id", insertable = true, updatable = true)
-    )
-    private List<Favor> favors;
+//    @ManyToMany
+//    @JoinTable(name = "product_favor",
+//            joinColumns = @JoinColumn(name = "product_id", insertable = true, updatable = true),
+//            inverseJoinColumns = @JoinColumn(name = "favor_id", insertable = true, updatable = true)
+//    )
+//    private List<Favor> favors;
+    @Column(name = "category")
+    private String category;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")

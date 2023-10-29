@@ -55,7 +55,6 @@ public class LoginController {
             newUser.setPassword(user.getPassword());
             newUser.setEmail(user.getEmail());
             newUser.setRole(1);
-            newUser.setPhone(user.getPhone());
             userService.create(newUser);
             return "login1";
         }else{
